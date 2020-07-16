@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -19,8 +18,8 @@ public class GUI implements ActionListener{
 	private Timer timer;
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
-	JPanel contentPane = new JPanel();
 	JButton stopButton = new JButton("Stop");
+	JButton pauseButton = new JButton("Pause");
 	JButton executeButton = new JButton("Execute");
 	
 	
@@ -63,16 +62,29 @@ public class GUI implements ActionListener{
 			
 		});
 		
+		pauseButton.setBounds(10, 40, 320, 20);
+		pauseButton.setLocation(200, 50);
+		pauseButton.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Pause the printing service
+				
+			}
+			
+		});
+		
 		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-		panel.setBounds(10, 32, 274, 33);
-		contentPane.add(panel);
+		panel.setLayout(new GridLayout(2, 1, 3, 3));
 		
 
 		panel.add(scrollPane);
 		panel.add(executeButton);
+		panel.add(pauseButton);
 		panel.add(stopButton);
 
 		// Basic frame set up
+		frame.getContentPane().add(panel);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Weather sensor");
