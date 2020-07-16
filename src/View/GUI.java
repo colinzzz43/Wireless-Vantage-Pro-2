@@ -10,54 +10,76 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 public class GUI implements ActionListener{
+	
+	private Timer timer;
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JPanel contentPane = new JPanel();
+	JButton stopButton = new JButton("Stop");
+	JButton executeButton = new JButton("Execute");
+	
 	
 	public GUI() {
 
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-		panel.setLayout(new GridLayout(0, 1));
-		
-		
-		// Basic frame set up
-		JFrame frame = new JFrame();
-		frame.add(panel, BorderLayout.CENTER);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Weather sensor");
-		frame.setPreferredSize(new Dimension(700, 500));
-		frame.pack();
-		frame.setResizable(false);
-		frame.setVisible(true);
-		
-	
 		// Sensors
 		
 		
+		// Text area to show the result
+		JTextArea resultDisplay = new JTextArea(30, 30);
+		resultDisplay.setEditable(false);
+		resultDisplay.setBounds(10, 10, 240, 20);
+		// Scroll panel
+		JScrollPane scrollPane = new JScrollPane(resultDisplay, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
 		// Buttons
-		JButton executeButton = new JButton("Execute");
-		panel.add(executeButton);
+		executeButton.setBounds(260, 10, 100, 20);
+		executeButton.setLocation(100, 50);
 		executeButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				// Start printing out the data
+				timer.start();
 			}
 			
 		});
 		
-		JButton stopButton = new JButton("Stop");
-		panel.add(stopButton);
+		
+		stopButton.setBounds(10, 40, 320, 20);
+		stopButton.setLocation(200, 50);
 		stopButton.addActionListener(new ActionListener() {
-
+		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				// Terminate the printing service
+				timer.stop();
 			}
 			
 		});
+		
+		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+		panel.setBounds(10, 32, 274, 33);
+		contentPane.add(panel);
+		
+
+		panel.add(scrollPane);
+		panel.add(executeButton);
+		panel.add(stopButton);
+
+		// Basic frame set up
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Weather sensor");
+		frame.setPreferredSize(new Dimension(500, 500));
+		frame.pack();
+		frame.setResizable(false);
+		frame.setVisible(true);
 
 
 	}
@@ -71,5 +93,8 @@ public class GUI implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+
 
 }
