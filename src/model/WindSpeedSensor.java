@@ -13,7 +13,7 @@ public class WindSpeedSensor extends AbstractSensor {
     private String myWindSpeed;
     
 	/** Timer which can be cancel() by Main or Test classes */
-	public Timer timer;
+	public static Timer timer = new Timer();
     
     
     public WindSpeedSensor() {
@@ -33,12 +33,21 @@ public class WindSpeedSensor extends AbstractSensor {
     	myWindSpeed = Integer.toString(random.nextInt(200)); //1 byte max unsigned, 0-200 MPH
     }
     
+    @Override
+	public void cancelTimer() {
+		timer.cancel();
+	}
+
+	@Override
+	public void restartTimer() {
+		timer = new Timer();
+	}
+    
 	/**
 	 * creates a new thread to generate proxy data every 30 seconds
 	 */
 	@Override
 	public void run() {
-		timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
             public void run() {

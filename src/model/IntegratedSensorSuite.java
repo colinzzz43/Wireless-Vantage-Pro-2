@@ -114,7 +114,7 @@ public class IntegratedSensorSuite implements Serializable{
             public void run() {
                 System.out.println(Main.myIntegratedSensorSuite);
             }
-		}, 0, 1000); //runs once initially then again every second
+		}, 1000, 1000); //runs once after a 1sec delay then again every second
     }
 
     /**
@@ -131,6 +131,62 @@ public class IntegratedSensorSuite implements Serializable{
         myCurrentWindSpeed = myWindSpeedSensor.getCurrentWindSpeed();
         myCurrentHumidity = myHumiditySensor.getSensorReading();
         myCurrentTemperature = myTemperatureSensor.getSensorReading();
+    }
+    
+    
+    public void startHumiditySensor() {
+        myHumiditySensor = new HumiditySensor();
+        myHumiditySensor.restartTimer();
+		humidityThread = new Thread(new HumiditySensor());
+		humidityThread.start();
+    }
+    
+    public void startRainCollector() {
+    	myRainSensor = new RainCollectorSensor();
+    	myRainSensor.restartTimer();
+    	rainThread = new Thread(new RainCollectorSensor());
+    	rainThread.start();
+    }
+    
+    public void startTemperatureSensor() {
+    	myTemperatureSensor = new TemperatureSensor();
+    	myTemperatureSensor.restartTimer();
+        temperatureThread = new Thread(new TemperatureSensor());
+		temperatureThread.start();
+    }
+    
+    public void startWindDirectionSensor() {
+    	myWindDirectionSensor = new WindDirectionSensor();
+    	myWindDirectionSensor.restartTimer();
+    	windDirectionThread = new Thread(new WindDirectionSensor());
+    	windDirectionThread.start();
+    }
+    
+    public void resumeWindSpeedSensor() {
+    	myWindSpeedSensor = new WindSpeedSensor();
+    	myWindSpeedSensor.restartTimer();
+    	windSpeedThread = new Thread(new WindSpeedSensor());
+        windSpeedThread.start();
+    }
+    
+    public void pauseHumiditySensor() {
+    	myHumiditySensor.cancelTimer();
+    }
+    
+    public void pauseRainSensor() {
+    	myRainSensor.cancelTimer();
+    }
+    
+    public void pauseTemperatureSensor() {
+    	myTemperatureSensor.cancelTimer();
+    }
+    
+    public void pauseWindDirectionSensor() {
+    	myWindDirectionSensor.cancelTimer();
+    }
+    
+    public void pauseWindSpeedSensor() {
+    	myWindSpeedSensor.cancelTimer();
     }
     
     /**

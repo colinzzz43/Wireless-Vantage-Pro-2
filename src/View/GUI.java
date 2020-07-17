@@ -3,16 +3,23 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JViewport;
-import javax.swing.Timer;
+import java.util.Timer;
+
+import application.Main;
 
 public class GUI implements ActionListener{
+	
+	public static Timer timer;
+	
+	private boolean running;
 	
 	public GUI() {
 		
@@ -20,7 +27,9 @@ public class GUI implements ActionListener{
 		JPanel panel = new JPanel();
 		JButton stopButton = new JButton("Stop");
 		JButton pauseButton = new JButton("Pause");
-		JButton executeButton = new JButton("Execute");
+		JButton startButton = new JButton("Start");
+		running = false;
+		
 
 		
 		// Sensors
@@ -40,30 +49,39 @@ public class GUI implements ActionListener{
 
 		
 		
-		Timer timer = new Timer(500, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getValue()+10);
-                if (scrollPane.getVerticalScrollBar().getValue()>=scrollPane.getVerticalScrollBar().getMaximum()) {
-                    ((Timer)e.getSource()).stop();
-                }
-			}
-			
-		});
+//		Timer timer = new Timer(500, new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getValue()+10);
+//                if (scrollPane.getVerticalScrollBar().getValue()>=scrollPane.getVerticalScrollBar().getMaximum()) {
+//                    ((Timer)e.getSource()).stop();
+//                }
+//			}
+//			
+//		});
 		
 		
 		// Buttons
-		executeButton.setBounds(370, 700, 100, 20);
-		executeButton.addActionListener(new ActionListener() {
+		startButton.setBounds(370, 700, 100, 20);
+		startButton.addActionListener(new ActionListener() {
 
 			@Override
+			/**
+			 * sets the program status to running and periodically prints the sensor data to the GUI
+			 */
 			public void actionPerformed(ActionEvent e) {
 				// Start printing out the data
-				timer.start();
-				for (int i = 0; i < 5000; i++) {
-					displayConsole.append("Testing\n");
-				}
+				if (running) return;
+				timer = new Timer();
+				timer.schedule(new TimerTask() {
+					@Override
+		            public void run() {
+						running = true;
+						displayConsole.append(Main.myIntegratedSensorSuite+"\n");
+		            }
+				}, 1000, 1000); //runs once initially then again every 3 seconds
+				
 			}
 			
 		});
@@ -74,7 +92,10 @@ public class GUI implements ActionListener{
 		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Pause the printing service
+				if (running) {
+					timer.cancel();
+					running = false;
+				}
 			
 			}
 			
@@ -83,13 +104,16 @@ public class GUI implements ActionListener{
 		
 		stopButton.setBounds(570, 700, 100, 20);
 		stopButton.addActionListener(new ActionListener() {
-		
 			@Override
+			/**
+			 * terminates the timer that all sensors are running on and cancel printing of those values
+			 */
 			public void actionPerformed(ActionEvent e) {
-				// Terminate the printing service
-				timer.stop();
+				if (running) {
+					timer.cancel();
+					running = false;
+				}
 			}
-			
 		});
 		
 		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
@@ -104,7 +128,7 @@ public class GUI implements ActionListener{
 		
 		
 		panel.setLayout(null);
-		panel.add(executeButton);
+		panel.add(startButton);
 		panel.add(pauseButton);
 		panel.add(stopButton);
 		
@@ -117,10 +141,6 @@ public class GUI implements ActionListener{
 		frame.add(panel);
 		frame.setVisible(true);
 
-	}
-	
-	public static void main(String[] args) {
-		new GUI();
 	}
 
 	@Override

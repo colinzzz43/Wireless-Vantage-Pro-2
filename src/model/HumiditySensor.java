@@ -52,6 +52,16 @@ public class HumiditySensor extends AbstractSensor{
 		myHumidity = random.nextInt(101); //from 0-100, field is a percentage
 	}
 	
+	@Override
+	public void cancelTimer() {
+		timer.cancel();
+	}
+
+	@Override
+	public void restartTimer() {
+		timer = new Timer();
+	}
+	
 	/**
 	 * creates a new thread to generate proxy data every 30 seconds
 	 */

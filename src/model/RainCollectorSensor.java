@@ -72,6 +72,16 @@ public class RainCollectorSensor extends AbstractSensor {
 		else return result + " in. in the collector.";
 	}
 	
+	@Override
+	public void cancelTimer() {
+		timer.cancel();
+	}
+
+	@Override
+	public void restartTimer() {
+		timer = new Timer();
+	}
+	
 	/**
 	 * creates a new thread to generate proxy data every 30 seconds
 	 */
