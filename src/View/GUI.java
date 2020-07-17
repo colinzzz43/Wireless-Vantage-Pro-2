@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JViewport;
 import javax.swing.Timer;
 
 public class GUI implements ActionListener{
@@ -29,18 +30,16 @@ public class GUI implements ActionListener{
 		
 		
 		
-		
-		
-		
-		
-		
 		// Text area to show the result
 		JTextArea displayConsole = new JTextArea(30, 30);
 		displayConsole.setEditable(false);
+
 		// Scroll panel
 		JScrollPane scrollPane = new JScrollPane(displayConsole, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 20, 960, 500);
 
+		
+		
 		Timer timer = new Timer(500, new ActionListener() {
 
 			@Override
