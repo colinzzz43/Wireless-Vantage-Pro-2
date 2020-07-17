@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import model.*;
-import View.*;
+import view.*;
 
 /**
  * TCSS 360 Group project#1 - Group 01
@@ -24,7 +24,7 @@ public class Main {
     
 	public static void main(String[] args) {
 		
-		GUI g = new GUI();
+		new ConsoleView();
 		
 	}
 

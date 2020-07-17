@@ -1,4 +1,4 @@
-package View;
+package view;
 
 
 import java.awt.event.ActionEvent;
@@ -15,13 +15,13 @@ import java.util.Timer;
 
 import application.Main;
 
-public class GUI implements ActionListener{
+public class ConsoleView implements ActionListener{
 	
 	public static Timer timer;
 	
 	private boolean running;
 	
-	public GUI() {
+	public ConsoleView() {
 		
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
