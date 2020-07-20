@@ -60,7 +60,17 @@ public class TemperatureSensor extends AbstractSensor{
     	else if(temp > 150) {
     		temp = 150;
     	}		
-	}    
+	} 
+	
+	@Override
+	public void cancelTimer() {
+		timer.cancel();
+	}
+
+	@Override
+	public void restartTimer() {
+		timer = new Timer();
+	}
 	
 	/**
 	 * creates a new thread to generate proxy data every 30 seconds

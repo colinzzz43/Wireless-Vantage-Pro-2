@@ -47,5 +47,15 @@ public class WindDirectionSensor extends AbstractSensor {
             }
 		}, 0, 3000); //runs once initially then again every 3 seconds
 	}
+
+	@Override
+	public void cancelTimer() {
+		timer.cancel();
+	}
+
+	@Override
+	public void restartTimer() {
+		timer = new Timer();
+	}
     
 }

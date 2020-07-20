@@ -17,5 +17,8 @@ public abstract class AbstractSensor implements Runnable{
     
     protected static Random random = new Random();
     
+    public abstract void cancelTimer();
+    
+    public abstract void restartTimer();
   
 }
