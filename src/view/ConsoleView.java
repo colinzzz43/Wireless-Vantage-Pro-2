@@ -3,6 +3,9 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
@@ -11,13 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import java.util.Timer;
 
 import application.Main;
 
 public class ConsoleView implements ActionListener{
 	
-	public static Timer timer;
+	public  Timer timer;
 	
 	private boolean running;
 	
@@ -26,17 +28,10 @@ public class ConsoleView implements ActionListener{
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
 		JButton stopButton = new JButton("Stop");
-		JButton pauseButton = new JButton("Pause");
 		JButton startButton = new JButton("Start");
 		running = false;
 		
 
-		
-		// Sensors
-		// Probably make a sensor method to display each data
-		
-		
-		
 		
 		
 		// Text area to show the result
@@ -47,23 +42,19 @@ public class ConsoleView implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(displayConsole, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 20, 960, 500);
 
+		// Auto-scroll for scroll panel 
+		scrollPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+	        public void adjustmentValueChanged(AdjustmentEvent e) {  
+	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
+	        }
+	    });
 		
 		
-//		Timer timer = new Timer(500, new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getValue()+10);
-//                if (scrollPane.getVerticalScrollBar().getValue()>=scrollPane.getVerticalScrollBar().getMaximum()) {
-//                    ((Timer)e.getSource()).stop();
-//                }
-//			}
-//			
-//		});
+
 		
 		
 		// Buttons
-		startButton.setBounds(370, 700, 100, 20);
+		startButton.setBounds(300, 700, 200, 50);
 		startButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -85,24 +76,10 @@ public class ConsoleView implements ActionListener{
 			}
 			
 		});
+
 		
 		
-		pauseButton.setBounds(470, 700, 100, 20);
-		pauseButton.addActionListener(new ActionListener() {
-		
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (running) {
-					timer.cancel();
-					running = false;
-				}
-			
-			}
-			
-		});
-		
-		
-		stopButton.setBounds(570, 700, 100, 20);
+		stopButton.setBounds(533, 700, 200, 50);
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			/**
@@ -115,6 +92,7 @@ public class ConsoleView implements ActionListener{
 				}
 			}
 		});
+
 		
 		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 		panel.setBounds(10, 32, 274, 33);
@@ -129,8 +107,8 @@ public class ConsoleView implements ActionListener{
 		
 		panel.setLayout(null);
 		panel.add(startButton);
-		panel.add(pauseButton);
 		panel.add(stopButton);
+		
 		
 		// Basic frame set up
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
