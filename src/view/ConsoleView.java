@@ -164,7 +164,7 @@ public class ConsoleView implements ActionListener{
 		
 		temperatureButton.addActionListener(e -> {
 			if (temperatureButton.getText().equals("Start")) {
-				temperatureText.setText(""+myCurrentTemperature);
+				temperatureText.setText(""+myCurrentTemperature + "° F");
 			} else if (temperatureButton.getText().equals("Stop")) {
 				temperatureText.setText("--");
 			}
@@ -174,7 +174,7 @@ public class ConsoleView implements ActionListener{
 		
 		humidityButton.addActionListener(e -> {
 			if (humidityButton.getText().equals("Start")) {
-				humidityText.setText(""+myCurrentHumidity);
+				humidityText.setText(""+myCurrentHumidity + "%");
 			} else if (humidityButton.getText().equals("Stop")) {
 				humidityText.setText("--");
 			}
@@ -218,10 +218,10 @@ public class ConsoleView implements ActionListener{
 			windDirectionText.setText(myCurrentWindDirection);
 		}
 		if(!temperatureText.getText().equals("--")) {
-			temperatureText.setText(""+myCurrentTemperature);
+			temperatureText.setText(""+myCurrentTemperature + "° F");
 		}
 		if(!humidityText.getText().equals("--")) {
-			humidityText.setText(""+myCurrentHumidity);
+			humidityText.setText(""+myCurrentHumidity + "%");
 		}
 		if(!rainText.getText().equals("--")) {
 			rainText.setText(""+myCurrentRainAmount);
