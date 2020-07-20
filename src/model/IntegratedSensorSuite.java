@@ -66,7 +66,7 @@ public class IntegratedSensorSuite implements Serializable{
         initializeSensors();
         initializeThreads();
         startAllThreads();
-        initializeOutputTimer();
+        //initializeOutputTimer();
     }
     
     /**
