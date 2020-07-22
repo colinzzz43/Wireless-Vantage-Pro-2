@@ -24,8 +24,8 @@ public class WindSpeedSensor extends AbstractSensor {
      * @return myWindSpeed - a formatted string which reports the speed of the wind
      */
     public String getCurrentWindSpeed() {
-        myWindSpeed += " MPH"; //format string
-        return myWindSpeed;
+        //myWindSpeed += " MPH"; //format string
+        return myWindSpeed += " MPH";
     }
     
     /** reinitializes both wind data variables. */
@@ -56,4 +56,10 @@ public class WindSpeedSensor extends AbstractSensor {
 		}, 0, 3000); //runs once initially then again every 3 seconds
 	}
     
+	/**
+	 * get raw windspeed
+	 */
+	public String rawWindSpeed() {
+		return myWindSpeed;
+	}
 }

@@ -25,8 +25,8 @@ public class WindDirectionSensor extends AbstractSensor {
      * @return myWindDirection - a formatted string which reports the direction of the wind
      */
     public String getCurrentWindDirection() {
-        myWindDirection += DEGREE_SYMBOL; //format string
-        return myWindDirection;
+        //myWindDirection += DEGREE_SYMBOL; //format string
+        return myWindDirection += DEGREE_SYMBOL;
     }
     
     /** reinitializes both wind data variables. */
@@ -56,6 +56,13 @@ public class WindDirectionSensor extends AbstractSensor {
 	@Override
 	public void restartTimer() {
 		timer = new Timer();
+	}
+	
+	/**
+	 * Returns the raw wind direction
+	 */
+	public String rawWindDirection() {
+		return myWindDirection;
 	}
     
 }

@@ -95,4 +95,18 @@ public class RainCollectorSensor extends AbstractSensor {
             }
 		}, 0, 20000); //runs once initially then again every 20 seconds
 	}
+	
+	/**
+	 * Returns metric status
+	 */
+	public boolean getMetric() {
+		return metric;
+	}
+	
+	/**
+	 * Returns raw result
+	 */
+	public double getRawResult() {
+		return result;
+	}
 }

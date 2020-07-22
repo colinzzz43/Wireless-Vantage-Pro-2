@@ -15,6 +15,9 @@ public class HumiditySensor extends AbstractSensor{
 	 * Holds the value of the humidity sensor
 	 */
     private int myHumidity;
+    
+    //Tells if the timer is cancelled or not
+    private boolean timerCancelled;
 
     /**
      * Constructor. Initializes humidity to 1.
@@ -22,6 +25,7 @@ public class HumiditySensor extends AbstractSensor{
      */
     public HumiditySensor(){
     	myHumidity = 1;
+    	timerCancelled = true;
     }
 
     /**
@@ -54,11 +58,13 @@ public class HumiditySensor extends AbstractSensor{
 	
 	@Override
 	public void cancelTimer() {
+		timerCancelled = true;
 		timer.cancel();
 	}
 
 	@Override
 	public void restartTimer() {
+		timerCancelled = false;
 		timer = new Timer();
 	}
 	
@@ -67,6 +73,7 @@ public class HumiditySensor extends AbstractSensor{
 	 */
 	@Override
 	public void run() {
+		timerCancelled = false;
 		timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
@@ -74,5 +81,12 @@ public class HumiditySensor extends AbstractSensor{
                 Main.myIntegratedSensorSuite.reinitializeHumidityData();
             }
 		}, 0, 60000); //runs once initially then again every 60 seconds
+	}
+	
+	/**
+	 * gets timer status.
+	 */
+	public boolean getTimerStatus() {
+		return timerCancelled;
 	}
 }
