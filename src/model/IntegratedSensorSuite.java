@@ -47,15 +47,15 @@ public class IntegratedSensorSuite implements Serializable{
     
     public double myCurrentRainAmount;
     
-    Thread windSpeedThread;
+    private transient Thread windSpeedThread;
     
-    Thread windDirectionThread;
+    private transient Thread windDirectionThread;
     
-	Thread humidityThread;
+    private transient Thread humidityThread;
 	
-	Thread rainThread;
+    private transient Thread rainThread;
 	
-	Thread temperatureThread;
+    private transient Thread temperatureThread;
     
     /** 
      * Constructor of a Integrated Sensor Suite which contains a variety of sensors and stores the current data. 
@@ -256,21 +256,4 @@ public class IntegratedSensorSuite implements Serializable{
                 + myCurrentHumidity + "%. Temperature: " + myCurrentTemperature + DEGREE_SYMBOL + "F. " + "RainAmount: " 
                 + myCurrentRainAmount;
     }
-    
-//	/**
-//	 * creates a new thread to generate proxy data every 30 seconds
-//	 */
-//	@Override
-//	public void run() {
-//		timer = new Timer();
-//		timer.schedule(new TimerTask() {
-//			@Override
-//            public void run() {
-//                Main.myIntegratedSensorSuite.reinitializeData();;
-//                System.out.println(Main.myIntegratedSensorSuite);
-//                Main.serialization("data.txt", Main.myIntegratedSensorSuite);
-//            }
-//		}, 0, 30000); //runs once initially then again every 30 seconds
-//	}
-//    
 }

@@ -66,7 +66,8 @@ public class Main {
    * For testing purposes, a method to deserialize the data.
    * @param theFilePath
    */
-  public static void deserialization(String theFilePath) {
+  public static IntegratedSensorSuite deserialization(String theFilePath) {
+	  Object theSuite=null;
       try
       {    
           // Reading the object from a file 
@@ -74,7 +75,7 @@ public class Main {
           ObjectInputStream in = new ObjectInputStream(file); 
             
           // Method for deserialization of object 
-          IntegratedSensorSuite theSuite = (IntegratedSensorSuite) in.readObject(); 
+          theSuite = (IntegratedSensorSuite) in.readObject(); 
             
           in.close(); 
           file.close(); 
@@ -82,6 +83,7 @@ public class Main {
           System.out.println("Object has been deserialized"); 
           
           System.out.println(theSuite.toString());
+          
       } 
         
       catch(IOException ex) 
@@ -93,5 +95,6 @@ public class Main {
       { 
           System.out.println("ClassNotFoundException is caught"); 
       } 
+      return (IntegratedSensorSuite)theSuite;
   }
 }

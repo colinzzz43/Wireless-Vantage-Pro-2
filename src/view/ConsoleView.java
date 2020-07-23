@@ -10,43 +10,46 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import application.Main;
+import model.IntegratedSensorSuite;
 
 public class ConsoleView implements ActionListener{
 	
 	public  Timer timer;
-	JFrame frame;
-	JPanel panel;
-	JPanel universalPanel;
-	JLabel universalLabel;
-	JButton universalButton;
-	JPanel windSpeedPanel;
-	JLabel windSpeedLabel;
-	JLabel windSpeedText;
-	JButton windSpeedButton;
-	JPanel windDirectionPanel;
-	JLabel windDirectionLabel;
-	JLabel windDirectionText;
-	JButton windDirectionButton;
-	JPanel humidityPanel;
-	JLabel humidityLabel;
-	JLabel humidityText;
-	JButton humidityButton;
-	JPanel temperaturePanel;
-	JLabel temperatureLabel;
-	JLabel temperatureText;
-	JButton temperatureButton;
-	JPanel rainPanel;
-	JLabel rainLabel;
-	JLabel rainText;
-	JButton rainButton;
+	private JFrame frame;
+	private JPanel panel;
+	private JPanel universalPanel;
+	private JLabel universalLabel;
+	private JButton universalButton;
+	private JPanel windSpeedPanel;
+	private JLabel windSpeedLabel;
+	private JLabel windSpeedText;
+	private JButton windSpeedButton;
+	private JPanel windDirectionPanel;
+	private JLabel windDirectionLabel;
+	private JLabel windDirectionText;
+	private JButton windDirectionButton;
+	private JPanel humidityPanel;
+	private JLabel humidityLabel;
+	private JLabel humidityText;
+	private JButton humidityButton;
+	private JPanel temperaturePanel;
+	private JLabel temperatureLabel;
+	private JLabel temperatureText;
+	private JButton temperatureButton;
+	private JPanel rainPanel;
+	private JLabel rainLabel;
+	private JLabel rainText;
+	private JButton rainButton;
+	public IntegratedSensorSuite myISS;
     public String myCurrentWindDirection;
     public String myCurrentWindSpeed;
     public int myCurrentHumidity;
     public int myCurrentTemperature;
     public double myCurrentRainAmount;
+    private boolean serialized;
 	
 	public ConsoleView() {
-
+		serialized = false;
 		//frame setup
 		frame = new JFrame();
 		panel = new JPanel(new GridLayout(2,3));
@@ -109,12 +112,20 @@ public class ConsoleView implements ActionListener{
 		timer.schedule(new TimerTask() {
 			@Override
             public void run() {
-			    myCurrentWindDirection = Main.myIntegratedSensorSuite.myCurrentWindDirection;
-			    myCurrentWindSpeed = Main.myIntegratedSensorSuite.myCurrentWindSpeed;
-			    myCurrentHumidity = Main.myIntegratedSensorSuite.myCurrentHumidity;
-			    myCurrentTemperature = Main.myIntegratedSensorSuite.myCurrentTemperature;
-			    myCurrentRainAmount = Main.myIntegratedSensorSuite.myCurrentRainAmount;
-			    refreshSensorData();
+				if (serialized) {
+					myCurrentWindDirection = myISS.myCurrentWindDirection;
+				    myCurrentWindSpeed = myISS.myCurrentWindSpeed;
+				    myCurrentHumidity = myISS.myCurrentHumidity;
+				    myCurrentTemperature = myISS.myCurrentTemperature;
+				    myCurrentRainAmount = myISS.myCurrentRainAmount;
+				} else {
+					myCurrentWindDirection = Main.myIntegratedSensorSuite.myCurrentWindDirection;
+				    myCurrentWindSpeed = Main.myIntegratedSensorSuite.myCurrentWindSpeed;
+				    myCurrentHumidity = Main.myIntegratedSensorSuite.myCurrentHumidity;
+				    myCurrentTemperature = Main.myIntegratedSensorSuite.myCurrentTemperature;
+				    myCurrentRainAmount = Main.myIntegratedSensorSuite.myCurrentRainAmount;
+				}
+				refreshSensorData();
             }
 		}, 0, 1000); //runs once initially then again every 3 seconds
 
@@ -263,6 +274,14 @@ public class ConsoleView implements ActionListener{
 		windDirectionButton.doClick();
 		universalButton.doClick();
 		universalButton.doClick();
+	}
+	
+	/**
+	 * 
+	 */
+	public void parseSerialized() {
+		myISS = Main.deserialization("data.txt");
+		serialized = true;
 	}
 
 	@Override
