@@ -162,7 +162,7 @@ public class IntegratedSensorSuite implements Serializable{
     	windDirectionThread.start();
     }
     
-    public void resumeWindSpeedSensor() {
+    public void startWindSpeedSensor() {
     	myWindSpeedSensor = new WindSpeedSensor();
     	myWindSpeedSensor.restartTimer();
     	windSpeedThread = new Thread(new WindSpeedSensor());

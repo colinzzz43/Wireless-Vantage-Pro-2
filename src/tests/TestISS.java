@@ -20,6 +20,24 @@ class TestISS {
 	}
 	
 	/**
+	 * The sensor suite should not be null when the constructor is called.
+	 */
+	@Test
+	void testAssorted() {
+		myISS = new IntegratedSensorSuite(1);
+		assert(myISS != null);
+		myISS.startHumiditySensor();
+		myISS.startRainCollector();
+		myISS.startTemperatureSensor();
+		myISS.startWindDirectionSensor();
+		myISS.startWindSpeedSensor();
+		myISS.pauseHumiditySensor();
+		myISS.pauseRainSensor();
+		myISS.pauseTemperatureSensor();
+		myISS.pauseWindDirectionSensor();
+	}
+	
+	/**
 	 * Tests the ability to print data to console.
 	 */
 	@Test

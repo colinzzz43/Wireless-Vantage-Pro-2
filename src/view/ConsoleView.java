@@ -246,6 +246,24 @@ public class ConsoleView implements ActionListener{
 			}
 		}
 	}
+	
+	/**
+	 * method used exclusively for testing, triggers 2 clicks on each button
+	 */
+	public void triggerActions() {
+		humidityButton.doClick();
+		rainButton.doClick();
+		temperatureButton.doClick();
+		windSpeedButton.doClick();
+		windDirectionButton.doClick();
+		humidityButton.doClick();
+		rainButton.doClick();
+		temperatureButton.doClick();
+		windSpeedButton.doClick();
+		windDirectionButton.doClick();
+		universalButton.doClick();
+		universalButton.doClick();
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
