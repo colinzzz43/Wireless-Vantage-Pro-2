@@ -1,7 +1,5 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import application.Main;
@@ -10,6 +8,7 @@ class TestMain {
 	
 	Main mymain;
 
+	@SuppressWarnings("static-access")
 	@Test
 	void test() {
 		mymain.main(null);

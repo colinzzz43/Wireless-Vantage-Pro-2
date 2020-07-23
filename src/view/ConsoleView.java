@@ -48,8 +48,8 @@ public class ConsoleView implements ActionListener{
     public double myCurrentRainAmount;
     private boolean serialized;
 	
-	public ConsoleView() {
-		serialized = false;
+	public ConsoleView(boolean isSerialized) {
+		serialized = isSerialized;
 		//frame setup
 		frame = new JFrame();
 		panel = new JPanel(new GridLayout(2,3));

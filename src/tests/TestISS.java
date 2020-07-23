@@ -1,7 +1,5 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import model.IntegratedSensorSuite;
@@ -40,6 +38,7 @@ class TestISS {
 	/**
 	 * Tests the ability to print data to console.
 	 */
+	@SuppressWarnings("static-access")
 	@Test
 	void testInitializeOutputTimer() {
 		myISS = new IntegratedSensorSuite(1);

@@ -1,7 +1,5 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import javax.swing.JButton;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +17,7 @@ class TestConsoleView {
 	 */
 	@Test
 	void testConstructor() {
-		myConsoleView = new ConsoleView();
+		myConsoleView = new ConsoleView(false);
 		assert(myConsoleView != null);
 	}
 	
@@ -29,7 +27,7 @@ class TestConsoleView {
 	@Test
 	void testListener() {
 		testButton = new JButton("Start");
-		myConsoleView = new ConsoleView();
+		myConsoleView = new ConsoleView(false);
 		myConsoleView.checkUniversalButton();
 		myConsoleView.refreshSensorData();
 		myConsoleView.checkUniversalButton();
